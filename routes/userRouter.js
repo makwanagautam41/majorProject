@@ -40,7 +40,16 @@ router.post(
 router.post(
   "/edit-profile-image",
   isLoggedIn,
-  upload.single("profileImage"),
+  (req, res, next) => {
+    upload.single("profileImage")(req, res, function (err) {
+      if (err instanceof multer.MulterError || err.message) {
+        // Multer-specific error or custom error from fileFilter
+        req.flash("error", err.message);
+        return res.redirect("/profile");
+      }
+      next();
+    });
+  },
   usersController.editProfileImage
 );
 
