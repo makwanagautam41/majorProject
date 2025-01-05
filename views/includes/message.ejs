@@ -1,0 +1,59 @@
+<!-- <% if(success && success.length){ %>
+<div
+  class="alert alert-success alert-dismissible fade show text-center"
+  role="alert"
+>
+  <%= success %>
+  <script>
+    setTimeout(() => {
+      Swal.fire({
+        icon: "success",
+        title: "Success!",
+        text: "<%= success %>",
+        showConfirmButton: true,
+      });
+    }, 500);
+  </script>
+</div>
+<% } %> <% if(error && error.length){ %>
+<div
+  class="alert alert-danger alert-dismissible fade show text-center"
+  role="alert"
+>
+  <%= error %>
+  <script>
+    setTimeout(() => {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "<%= error %>",
+        showConfirmButton: true,
+      });
+    }, 500);
+  </script>
+</div>
+<% } %> -->
+
+<% if(success && success.length){ %>
+<script>
+  setTimeout(() => {
+    Swal.fire({
+      icon: "success",
+      title: "Success!",
+      text: "<%= success %>",
+      showConfirmButton: true,
+    });
+  }, 700);
+</script>
+<% } %> <% if(error && error.length){ %>
+<script>
+  setTimeout(() => {
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: "<%= error %>",
+      showConfirmButton: true,
+    });
+  }, 700);
+</script>
+<% } %>

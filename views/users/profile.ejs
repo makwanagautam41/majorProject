@@ -1,0 +1,93 @@
+<%- layout("./layouts/boilerplate.ejs") %>
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-6 col-md-8 col-sm-10">
+      <div class="card shadow">
+        <div class="card-header text-center bg-primary text-white">
+          <h3 class="mb-0">User Profile</h3>
+        </div>
+        <div class="card-body text-center p-3">
+          <!-- Trigger Button for Profile Image Edit -->
+          <a
+            href="#"
+            data-bs-toggle="modal"
+            data-bs-target="#editProfileImageModal"
+          >
+            <img
+              src="<%= user.profileImage.url %>"
+              class="rounded-circle profile-img mb-3"
+              alt="Profile Picture"
+            />
+          </a>
+          <h4>Username : <%= user.username %></h4>
+          <p><strong>Email :</strong><%= user.email %></p>
+          <p><strong>Mobile:</strong><%= user.mobile %></p>
+          <p><strong>Age:</strong><%= user.age %></p>
+          <p><strong>Adhar:</strong><%= user.adhar %></p>
+          <div class="d-grid gap-2 col-6 mx-auto">
+            <a href="/edit-profile" class="btn btn-primary">Edit Profile</a>
+            <a href="/logout" class="btn btn-danger">Logout</a>
+          </div>
+        </div>
+        <div class="card-footer text-center text-muted">© 2024 WanderLust</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal for Editing Profile Image -->
+<div
+  class="modal fade"
+  id="editProfileImageModal"
+  tabindex="-1"
+  aria-labelledby="editProfileImageModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editProfileImageModalLabel">
+          Edit Profile Image
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <!-- Display the current profile image -->
+        <div class="text-center mb-3">
+          <img
+            src="<%= user.profileImage.url %>"
+            alt="Current Profile Image"
+            id="currentProfileImage"
+            class="img-thumbnail"
+            style="width: 150px; height: 150px; object-fit: cover"
+          />
+        </div>
+        <!-- Form to upload a new profile image -->
+        <form
+          action="/edit-profile-image"
+          method="POST"
+          enctype="multipart/form-data"
+        >
+          <div class="mb-3">
+            <label for="profileImage" class="form-label"
+              >Choose New Profile Image</label
+            >
+            <input
+              type="file"
+              class="form-control"
+              id="profileImage"
+              name="profileImage"
+              required
+            />
+          </div>
+          <button type="submit" class="btn btn-primary">Update Image</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

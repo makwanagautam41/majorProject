@@ -1,0 +1,61 @@
+<nav
+  class="navbar navbar-expand-lg border-bottom sticky-top"
+  style="background-color: #fff"
+>
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/listings"
+      ><i class="fa-regular fa-compass"></i
+    ></a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNavAltMarkup"
+      aria-controls="navbarNavAltMarkup"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div
+      class="collapse navbar-collapse"
+      id="navbarNavAltMarkup"
+      style="background-color: #fff"
+    >
+      <div class="navbar-nav">
+        <a class="nav-link" href="/listings">Explore</a>
+        <a class="nav-link" href="/listings/new">Add new Listings</a>
+      </div>
+      <div class="navbar-nav ms-auto width-50">
+        <form action="/listings/search" class="d-flex" role="search" method="get">
+          <input
+            type="text"
+            name="query"
+            class="form-control me-2"
+            placeholder="Search Destination"
+          />
+          <button
+            style="margin-left: 5px"
+            class="btn btn-outline-danger"
+            type="submit"
+          >
+            <i
+              class="fa-solid fa-magnifying-glass"
+              style="display: inline; margin-right: 0.5rem"
+            ></i
+            >Search
+          </button>
+        </form>
+      </div>
+      <div class="navbar-nav ms-auto">
+        <% if(!currentUser) { %>
+        <a class="nav-link active" href="/signup"><b>SignUp</b></a>
+        <a class="nav-link" href="/login"><b>Login</b></a>
+        <% } %> <% if(currentUser) { %>
+        <a class="nav-link" href="/logout">Logout</a>
+        <a class="nav-link" href="/profile">Profile</a>
+        <% } %>
+      </div>
+    </div>
+  </div>
+</nav>

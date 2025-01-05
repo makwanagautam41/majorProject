@@ -1,0 +1,99 @@
+<%- layout("./layouts/boilerplate.ejs") %>
+
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-6 col-md-8 col-sm-10">
+      <div class="card shadow-lg border-0 rounded-4">
+        <div class="card-header text-center bg-primary text-white">
+          <h3 class="mb-0">Edit Profile</h3>
+        </div>
+        <div class="card-body p-4">
+          <form
+            action="/edit-profile"
+            method="POST"
+            onsubmit="return saveProfileSwal(event, this);"
+          >
+            <!-- Username -->
+            <div class="mb-3">
+              <label for="username" class="form-label">Username</label>
+              <input
+                type="text"
+                class="form-control"
+                id="username"
+                name="username"
+                value="<%= user.username %>"
+                required
+                placeholder="Enter your username"
+              />
+            </div>
+
+            <!-- Email -->
+            <div class="mb-3">
+              <label for="email" class="form-label">Email</label>
+              <input
+                type="email"
+                class="form-control"
+                id="email"
+                name="email"
+                value="<%= user.email %>"
+                required
+                placeholder="Enter your email"
+              />
+            </div>
+
+            <!-- Mobile -->
+            <div class="mb-3">
+              <label for="mobile" class="form-label">Mobile</label>
+              <input
+                type="text"
+                class="form-control"
+                id="mobile"
+                name="mobile"
+                value="<%= user.mobile %>"
+                required
+                placeholder="Enter your mobile number"
+              />
+            </div>
+
+            <!-- Age -->
+            <div class="mb-3">
+              <label for="age" class="form-label">Age</label>
+              <input
+                type="number"
+                class="form-control"
+                id="age"
+                name="age"
+                value="<%= user.age %>"
+                required
+                placeholder="Enter your age"
+              />
+            </div>
+
+            <!-- Adhar -->
+            <div class="mb-3">
+              <label for="adhar" class="form-label">Adhar</label>
+              <input
+                type="text"
+                class="form-control"
+                id="adhar"
+                name="adhar"
+                value="<%= user.adhar %>"
+                required
+                placeholder="Enter your Adhar number"
+              />
+            </div>
+
+            <!-- Submit and Cancel Buttons -->
+            <div class="d-grid gap-3">
+              <button type="submit" class="btn btn-success btn-lg">
+                Save Changes
+              </button>
+              <a href="/profile" class="btn btn-secondary btn-lg"> Cancel </a>
+            </div>
+          </form>
+        </div>
+        <div class="card-footer text-center text-muted">© 2024 WanderLust</div>
+      </div>
+    </div>
+  </div>
+</div>

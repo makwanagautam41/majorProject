@@ -1,0 +1,144 @@
+<%- layout("./layouts/boilerplate.ejs") %>
+
+<div class="container mt-5">
+  <!-- Page Header -->
+  <div class="row mb-4">
+    <div class="col text-center">
+      <h1 class="display-5 fw-bold text-primary">Edit Your Listing</h1>
+      <p class="text-muted">
+        Update the details of your listing to attract more visitors.
+      </p>
+    </div>
+  </div>
+
+  <!-- Edit Listing Form -->
+  <div class="row justify-content-center">
+    <div class="col-lg-8 col-md-10 col-sm-12">
+      <div class="card shadow border-0">
+        <div class="card-body p-4">
+          <form
+            method="POST"
+            action="/listings/<%= listing._id %>?_method=PUT"
+            enctype="multipart/form-data"
+            class="needs-validation"
+            novalidate
+            onsubmit="return confirmEditLisintgSwal(this);"
+          >
+            <!-- Title -->
+            <div class="mb-4">
+              <label for="title" class="form-label fw-semibold">Title</label>
+              <input
+                type="text"
+                class="form-control"
+                name="listing[title]"
+                id="title"
+                value="<%= listing.title %>"
+                required
+              />
+              <div class="invalid-feedback">
+                Please enter a title for the listing.
+              </div>
+            </div>
+
+            <!-- Description -->
+            <div class="mb-4">
+              <label for="description" class="form-label fw-semibold"
+                >Description</label
+              >
+              <textarea
+                class="form-control"
+                name="listing[description]"
+                id="description"
+                rows="4"
+                required
+              >
+<%= listing.description %></textarea
+              >
+              <div class="invalid-feedback">Please provide a description.</div>
+            </div>
+
+            <!-- Current Image -->
+            <div class="mb-4 text-center">
+              <label class="form-label fw-semibold d-block"
+                >Current Image</label
+              >
+              <img
+                src="<%= originalImageUrl %>"
+                alt="Current Listing Image"
+                class="img-thumbnail shadow-sm"
+              />
+            </div>
+
+            <!-- New Image Upload -->
+            <div class="mb-4">
+              <label for="image" class="form-label fw-semibold"
+                >Upload New Image</label
+              >
+              <input
+                type="file"
+                class="form-control"
+                name="listing[image]"
+                id="image"
+              />
+            </div>
+
+            <!-- Price and Country -->
+            <div class="row">
+              <div class="col-md-4 mb-4">
+                <label for="price" class="form-label fw-semibold">Price</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  name="listing[price]"
+                  id="price"
+                  value="<%= listing.price %>"
+                  required
+                />
+                <div class="invalid-feedback">Please enter a valid price.</div>
+              </div>
+              <div class="col-md-8 mb-4">
+                <label for="country" class="form-label fw-semibold"
+                  >Country</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  name="listing[country]"
+                  id="country"
+                  value="<%= listing.country %>"
+                  required
+                />
+                <div class="invalid-feedback">
+                  Please enter a valid country.
+                </div>
+              </div>
+            </div>
+
+            <!-- Location -->
+            <div class="mb-4">
+              <label for="location" class="form-label fw-semibold"
+                >Location</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                name="listing[location]"
+                id="location"
+                value="<%= listing.location %>"
+                required
+              />
+              <div class="invalid-feedback">Please provide a location.</div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="d-grid">
+              <button type="submit" class="btn btn-primary btn-lg">
+                Update Listing
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
