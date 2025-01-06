@@ -93,7 +93,9 @@ makwanagautam41-majorProject/
   - nodemon app.js
 
 ```bash
-  NOTE : make sure to change local database configuration in app.js and use your own .env file credential for working properly. Here i Userd Clodinary Storage for storing listings iamge and profile image. As well as also used mongodb for storing all users and listings information.
+  NOTE : make sure to change local database configuration in app.js and use your own .env file credential for working properly.
+Here i Userd Clodinary Storage for storing listings iamge and profile image.
+As well as also used mongodb for storing all users and listings information.
 ```
 
 5. **Access the app in your browser at `http://localhost:8080`.
