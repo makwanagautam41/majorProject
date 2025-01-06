@@ -15,37 +15,37 @@ This project is a web application inspired by the functionality of Airbnb, where
 ## Project Structure
 
 makwanagautam41-majorProject/
-**/controllers/** (Contains business logic controllers)
+* **/controllers/** (Contains business logic controllers)
     * `listingsController.js`: Handles logic for managing listings.
     * `reviewsController.js`: Manages review-related functionalities.
     * `usersController.js`: Handles user-related operations.
 
-**/init/** (Initialization scripts for the application)
+* **/init/** (Initialization scripts for the application)
     * `data.js`: Script for populating initial data.
     * `index.js`: Setup and configuration scripts.
 
-**/models/** (Defines database models)
+* **/models/** (Defines database models)
     * `listingModel.js`: Schema for listing data.
     * `reviewModel.js`: Schema for review data.
     * `userModel.js`: Schema for user data.
 
-**/public/** (Static assets)
+* **/public/** (Static assets)
     * **/css/** (Contains CSS stylesheets)
         * `rating.css`: Styles for rating components.
         * `style.css`: Main stylesheet for the application.
     * **/js/** (Contains JavaScript files)
         * `script.js`: Script for user interactions.
 
-**/routes/** (Defines application routes)
+* **/routes/** (Defines application routes)
     * `listingRouter.js`: Routes for listing management.
     * `reviewRouter.js`: Routes for review-related operations.
     * `userRouter.js`: Routes for user management.
 
-**/utils/** (Utility functions and helpers)
+* **/utils/** (Utility functions and helpers)
     * `ExpressError.js`: Custom error handling class.
     * `wrapAsync.js`: Wrapper for handling asynchronous errors.
 
-**/views/** (EJS view templates)
+* **/views/** (EJS view templates)
     * `error.ejs`: Template for error pages.
     * **/includes/** (Reusable components)
         * `error.ejs`: Error message partial.
@@ -66,7 +66,7 @@ makwanagautam41-majorProject/
         * `profile.ejs`: User profile page.
         * `signup.ejs`: User registration form.
 
-**Other Files:**
+* **Other Files:**
     * `Schema.js`: Defines the database schema and configurations.
     * `app.js`: Main application entry point.
     * `cloudConfig.js`: Configuration for cloud services (e.g., image uploads).
