@@ -15,56 +15,63 @@ This project is a web application inspired by the functionality of Airbnb, where
 ## Project Structure
 
 makwanagautam41-majorProject/
-├── Schema.js                # Database schema and configuration
-├── app.js                   # Main application entry point
-├── cloudConfig.js           # Configuration for cloud services (e.g., image uploads)
-├── middleware.js            # Custom middleware for the app
-├── package.json             # Node.js package configuration
-├── controllers/             # Business logic controllers
-│   ├── listingsController.js
-│   ├── reviewsController.js
-│   └── usersController.js
-├── init/                    # Initialization scripts
-│   ├── data.js              # Initial data population scripts
-│   └── index.js             # Setup-related configurations
-├── models/                  # Database models
-│   ├── listingModel.js
-│   ├── reviewModel.js
-│   └── userModel.js
-├── public/                  # Static assets
-│   ├── css/                 # CSS files
-│   │   ├── rating.css
-│   │   └── style.css
-│   └── js/                  # JavaScript files
-│       └── script.js
-├── routes/                  # Application routes
-│   ├── listingRouter.js
-│   ├── reviewRouter.js
-│   └── userRouter.js
-├── utils/                   # Utility functions
-│   ├── ExpressError.js      # Custom error handling class
-│   └── wrapAsync.js         # Wrapper for async error handling
-└── views/                   # EJS view templates
-    ├── error.ejs            # Error page
-    ├── includes/            # Reusable components
-    │   ├── error.ejs
-    │   ├── footer.ejs
-    │   ├── message.ejs
-    │   ├── navbar.ejs
-    │   └── pageNotFound.ejs
-    ├── layouts/             # Layout templates
-    │   └── boilerplate.ejs
-    ├── listings/            # Listing-related pages
-    │   ├── edit.ejs
-    │   ├── index.ejs
-    │   ├── new.ejs
-    │   └── show.ejs
-    └── users/               # User-related pages
-        ├── edit-profile.ejs
-        ├── login.ejs
-        ├── profile.ejs
-        └── signup.ejs
+**/controllers/** (Contains business logic controllers)
+    * `listingsController.js`: Handles logic for managing listings.
+    * `reviewsController.js`: Manages review-related functionalities.
+    * `usersController.js`: Handles user-related operations.
 
+**/init/** (Initialization scripts for the application)
+    * `data.js`: Script for populating initial data.
+    * `index.js`: Setup and configuration scripts.
+
+**/models/** (Defines database models)
+    * `listingModel.js`: Schema for listing data.
+    * `reviewModel.js`: Schema for review data.
+    * `userModel.js`: Schema for user data.
+
+**/public/** (Static assets)
+    * **/css/** (Contains CSS stylesheets)
+        * `rating.css`: Styles for rating components.
+        * `style.css`: Main stylesheet for the application.
+    * **/js/** (Contains JavaScript files)
+        * `script.js`: Script for user interactions.
+
+**/routes/** (Defines application routes)
+    * `listingRouter.js`: Routes for listing management.
+    * `reviewRouter.js`: Routes for review-related operations.
+    * `userRouter.js`: Routes for user management.
+
+**/utils/** (Utility functions and helpers)
+    * `ExpressError.js`: Custom error handling class.
+    * `wrapAsync.js`: Wrapper for handling asynchronous errors.
+
+**/views/** (EJS view templates)
+    * `error.ejs`: Template for error pages.
+    * **/includes/** (Reusable components)
+        * `error.ejs`: Error message partial.
+        * `footer.ejs`: Footer component.
+        * `message.ejs`: Flash message component.
+        * `navbar.ejs`: Navigation bar component.
+        * `pageNotFound.ejs`: 404 error page template.
+    * **/layouts/** (Layout templates)
+        * `boilerplate.ejs`: Main layout template.
+    * **/listings/** (Templates for listing-related views)
+        * `edit.ejs`: Edit listing page.
+        * `index.ejs`: Listing index page.
+        * `new.ejs`: New listing form.
+        * `show.ejs`: Show listing details.
+    * **/users/** (Templates for user-related views)
+        * `edit-profile.ejs`: Edit user profile page.
+        * `login.ejs`: User login page.
+        * `profile.ejs`: User profile page.
+        * `signup.ejs`: User registration form.
+
+**Other Files:**
+    * `Schema.js`: Defines the database schema and configurations.
+    * `app.js`: Main application entry point.
+    * `cloudConfig.js`: Configuration for cloud services (e.g., image uploads).
+    * `middleware.js`: Custom middleware for the application.
+    * `package.json`: Node.js package configuration.
 
 
 ## Installation
