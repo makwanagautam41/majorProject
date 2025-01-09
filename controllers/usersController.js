@@ -89,17 +89,23 @@ module.exports.editProfileImage = async (req, res) => {
     if (req.file) {
       const user = await User.findById(req.user._id);
 
-      if (!user) {
-        req.flash("error", "User not found");
+      if (!req.file) {
+        req.flash("error", "No file uploaded.");
         return res.redirect("/profile");
       }
 
       if (user.profileImage && user.profileImage.filename) {
-        await cloudinary.uploader.destroy(user.profileImage.filename);
+        try {
+          await cloudinary.uploader.destroy(user.profileImage.filename);
+        } catch (err) {
+          req.flash("error", "Error while deleting previous image");
+          return res.redirect("/profile");
+        }
       }
 
       let url = req.file.path;
       let filename = req.file.filename;
+
       user.profileImage = {
         url,
         filename,
@@ -107,10 +113,17 @@ module.exports.editProfileImage = async (req, res) => {
 
       await user.save();
 
-      req.flash("success", "Profile image updated successfully");
-      return res.redirect("/profile");
+      req.login(user, (err) => {
+        if (err) {
+          req.flash("error", "Error While Upading Session");
+          return res.redirect("/profile");
+        } else {
+          req.flash("success", "Profile Image Updated Successfully");
+          return res.redirect("/profile");
+        }
+      });
     } else {
-      req.flash("error", "No file uploaded");
+      req.flash("error", "No file uploaded.");
       return res.redirect("/profile");
     }
   } catch (err) {
