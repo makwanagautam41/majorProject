@@ -41,9 +41,8 @@ router.post(
   "/edit-profile-image",
   isLoggedIn,
   (req, res, next) => {
-    upload.single("profileImage")(req, res, function (err) {
-      if (err instanceof multer.MulterError || err.message) {
-        // Multer-specific error or custom error from fileFilter
+    upload.single("profileImage")(req, res, (err) => {
+      if (err) {
         req.flash("error", err.message);
         return res.redirect("/profile");
       }
