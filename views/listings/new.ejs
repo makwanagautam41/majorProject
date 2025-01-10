@@ -10,6 +10,7 @@
         class="needs-validation"
         enctype="multipart/form-data"
         novalidate
+        onsubmit="ButtonLoader()"
       >
         <!-- Title Field -->
         <div class="mb-3">
@@ -97,7 +98,7 @@
 
         <!-- Submit Button -->
         <div class="mb-3 text-center">
-          <button type="submit" class="btn btn-danger w-100">
+          <button id="button" type="submit" class="btn btn-danger w-100">
             Add Listing
           </button>
         </div>
