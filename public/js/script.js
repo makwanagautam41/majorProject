@@ -46,6 +46,9 @@ function confirmDeleteListingSwal(form) {
   }).then((result) => {
     if (result.isConfirmed) {
       form.submit(); // Proceed with the form submission
+      const button = document.getElementById("deleteButton");
+      button.classList.add("buttonload");
+      button.innerHTML = `<i class="fa fa-spinner fa-spin"></i> Deleting`;
     }
   });
   return false; // Prevent immediate form submission
@@ -63,6 +66,9 @@ function confirmEditLisintgSwal(form) {
   }).then((result) => {
     if (result.isConfirmed) {
       form.submit(); // Proceed with the form submission
+      const button = document.getElementById("listingButton");
+      button.classList.add("buttonload");
+      button.innerHTML = `<i class="fa fa-spinner fa-spin"></i>Loading...`;
     }
   });
   return false; // Prevent immediate form submission
@@ -114,4 +120,10 @@ function saveProfileSwal(event, form) {
   });
 
   return false; // Prevent form submission initially
+}
+
+function ButtonLoader() {
+  const button = document.getElementById("button");
+  button.classList.add("buttonload");
+  button.innerHTML = `<i class="fa fa-spinner fa-spin"></i> Loading`;
 }
