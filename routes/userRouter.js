@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const wrapAsync = require("../utils/wrapAsync");
 const passport = require("passport");
-const { saveRedirectUrl } = require("../middleware");
+const { saveRedirectUrl, validateImageFile } = require("../middleware");
 const usersController = require("../controllers/usersController");
 const { isLoggedIn, fileFilter } = require("../middleware");
 const multer = require("multer");
@@ -41,9 +41,8 @@ router.post(
   "/edit-profile-image",
   isLoggedIn,
   (req, res, next) => {
-    upload.single("profileImage")(req, res, function (err) {
-      if (err instanceof multer.MulterError || err.message) {
-        // Multer-specific error or custom error from fileFilter
+    upload.single("profileImage")(req, res, (err) => {
+      if (err) {
         req.flash("error", err.message);
         return res.redirect("/profile");
       }

@@ -14,7 +14,6 @@ const reviewRouter = require("./routes/reviewRouter");
 const userRouter = require("./routes/userRouter");
 
 const session = require("express-session");
-const MongoStore = require("connect-mongo");
 const flash = require("connect-flash");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
@@ -28,8 +27,7 @@ app.use(methodOverride("_method"));
 app.engine("ejs", ejsMate);
 app.use(express.static(path.join(__dirname, "public")));
 
-const MONGO_DB_URL = process.env.MONGO_DB_URL;
-const SESSION_SECRET_KEY = process.env.SESSION_SECRET_KEY;
+const MONGO_URL = "mongodb://127.0.0.1:27017/airbnb";
 
 main()
   .then(() => {
@@ -40,7 +38,7 @@ main()
   });
 
 async function main() {
-  await mongoose.connect(MONGO_DB_URL);
+  await mongoose.connect(MONGO_URL);
 }
 
 app.listen(8080, () => {
@@ -51,21 +49,8 @@ app.get("/", (req, res) => {
   res.redirect("/listings");
 });
 
-const store = MongoStore.create({
-  mongoUrl: MONGO_DB_URL,
-  crypto: {
-    secret: SESSION_SECRET_KEY,
-  },
-  touchAfter: 24 * 3600,
-});
-
-store.once("error", () => {
-  console.log("Error in mongo session store", err);
-});
-
 const sessionOption = {
-  store,
-  secret: SESSION_SECRET_KEY,
+  secret: "thisisnotagoodsecret",
   resave: false,
   saveUninitialized: true,
   cookie: {
@@ -95,20 +80,13 @@ app.use("/listings", listingRouter);
 app.use("/listings/:id/reviews", reviewRouter);
 app.use("/", userRouter);
 
-// middlware to Catch-all for 404 errors
+// middleware
 app.all("*", (req, res, next) => {
-  next(new ExpresError(404, "Page Not Found"));
+  next(new ExpresError(404, "Page not found"));
 });
 
-// Global error handler
 app.use((err, req, res, next) => {
-  const { statusCode = 500, message = "Something went wrong" } = err;
-
-  // Handle the 404 error specifically
-  if (statusCode === 404) {
-    res.status(404).render("includes/pageNotFound", { message });
-  } else {
-    // For other errors, render a generic error page
-    res.status(statusCode).render("includes/error", { err });
-  }
+  let { statusCode = 500, message = "something went wrong" } = err;
+  // res.status(statusCode).send(message);
+  res.render("error.ejs", { err });
 });
