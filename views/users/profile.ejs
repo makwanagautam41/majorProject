@@ -72,6 +72,8 @@
           action="/edit-profile-image"
           method="POST"
           enctype="multipart/form-data"
+          onsubmit="ButtonLoader()"
+          id="profileImageForm"
         >
           <div class="mb-3">
             <label for="profileImage" class="form-label"
@@ -85,7 +87,9 @@
               required
             />
           </div>
-          <button type="submit" class="btn btn-primary">Update Image</button>
+          <button id="button" type="submit" class="btn btn-primary">
+            Update Image
+          </button>
         </form>
       </div>
     </div>
