@@ -127,6 +127,7 @@ function ButtonLoader() {
   button.classList.add("buttonload");
   button.innerHTML = `<i class="fa fa-spinner fa-spin"></i> Loading`;
 }
+<<<<<<< HEAD
 
 function confirmDelete(event) {
   event.preventDefault(); // Prevent the default form submission
@@ -148,3 +149,5 @@ function confirmDelete(event) {
     }
   });
 }
+=======
+>>>>>>> b8582be07c894424e171dc3949882f0255b07e9e
