@@ -127,3 +127,24 @@ function ButtonLoader() {
   button.classList.add("buttonload");
   button.innerHTML = `<i class="fa fa-spinner fa-spin"></i> Loading`;
 }
+
+function confirmDelete(event) {
+  event.preventDefault(); // Prevent the default form submission
+
+  Swal.fire({
+    title: "Are you sure?",
+    text: "This action will remove your profile image permanently!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#d33",
+    cancelButtonColor: "#3085d6",
+    confirmButtonText: "Yes, delete it!",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      event.target.submit();
+      const button = document.getElementById("deleteButton");
+      button.classList.add("buttonload");
+      button.innerHTML = `<i class="fa fa-spinner fa-spin"></i> Deleting...`;
+    }
+  });
+}

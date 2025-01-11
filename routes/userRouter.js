@@ -52,6 +52,12 @@ router.post(
   usersController.editProfileImage
 );
 
+router.post(
+  "/remove-profile-image",
+  isLoggedIn,
+  usersController.removeProfileImage
+);
+
 router.get("/logout", usersController.logout);
 
 module.exports = router;

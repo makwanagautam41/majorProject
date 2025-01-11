@@ -136,6 +136,48 @@ module.exports.editProfileImage = async (req, res) => {
   }
 };
 
+module.exports.removeProfileImage = async (req, res) => {
+  try {
+    const user = await User.findById(req.user._id);
+
+    if (user.profileImage && user.profileImage.filename) {
+      try {
+        await cloudinary.uploader.destroy(user.profileImage.filename);
+      } catch (err) {
+        req.flash("error", "Error while deleting previous image");
+        return res.redirect("/profile");
+      }
+    }
+
+    let url =
+      "https://res.cloudinary.com/djbqtwzyf/image/upload/v1736612676/download_xbdz3s.jpg";
+    let filename = "download_xbdz3s";
+
+    user.profileImage = {
+      url,
+      filename,
+    };
+
+    await user.save();
+
+    req.login(user, (err) => {
+      if (err) {
+        req.flash("error", "Error While Upading Session");
+        return res.redirect("/profile");
+      } else {
+        req.flash("success", "Profile Image Updated Successfully");
+        return res.redirect("/profile");
+      }
+    });
+  } catch (err) {
+    req.flash(
+      "error",
+      "Error while deleting profile image, Please try again later."
+    );
+    return res.redirect("/profile");
+  }
+};
+
 module.exports.logout = (req, res, next) => {
   req.logout((err) => {
     if (err) {

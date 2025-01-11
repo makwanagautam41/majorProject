@@ -80,13 +80,20 @@ app.use("/listings", listingRouter);
 app.use("/listings/:id/reviews", reviewRouter);
 app.use("/", userRouter);
 
-// middleware
+// middlware to Catch-all for 404 errors
 app.all("*", (req, res, next) => {
-  next(new ExpresError(404, "Page not found"));
+  next(new ExpresError(404, "Page Not Found"));
 });
 
+// Global error handler
 app.use((err, req, res, next) => {
-  let { statusCode = 500, message = "something went wrong" } = err;
-  // res.status(statusCode).send(message);
-  res.render("error.ejs", { err });
+  const { statusCode = 500, message = "Something went wrong" } = err;
+
+  // Handle the 404 error specifically
+  if (statusCode === 404) {
+    res.status(404).render("includes/pageNotFound", { message });
+  } else {
+    // For other errors, render a generic error page
+    res.status(statusCode).render("includes/error", { err });
+  }
 });
