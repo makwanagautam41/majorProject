@@ -127,7 +127,6 @@ function ButtonLoader() {
   button.classList.add("buttonload");
   button.innerHTML = `<i class="fa fa-spinner fa-spin"></i> Loading`;
 }
-<<<<<<< HEAD
 
 function confirmDelete(event) {
   event.preventDefault(); // Prevent the default form submission
