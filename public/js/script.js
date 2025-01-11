@@ -149,5 +149,3 @@ function confirmDelete(event) {
     }
   });
 }
-=======
->>>>>>> b8582be07c894424e171dc3949882f0255b07e9e
