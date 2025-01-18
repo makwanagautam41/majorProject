@@ -27,6 +27,13 @@
           <div class="d-grid gap-2 col-6 mx-auto">
             <a href="/edit-profile" class="btn btn-primary">Edit Profile</a>
             <a href="/logout" class="btn btn-danger">Logout</a>
+            <a
+              id="deleteAccountButton"
+              href="javascript:void(0);"
+              class="btn btn-danger"
+              onclick="confirmDeleteAccount(event)"
+              >Delete Account</a
+            >
           </div>
         </div>
         <div class="card-footer text-center text-muted">© 2024 WanderLust</div>
@@ -91,8 +98,17 @@
             Update Image
           </button>
         </form>
-        <form action="/remove-profile-image" method="post" onsubmit="confirmDelete(event)">
-          <button id="deleteButton" type="submit" class="btn btn-danger mt-1 w-100">
+        <!-- Form for deleting profile image -->
+        <form
+          action="/remove-profile-image"
+          method="post"
+          onsubmit="confirmDeleteProfileImage(event)"
+        >
+          <button
+            id="deleteButton"
+            type="submit"
+            class="btn btn-danger mt-1 w-100"
+          >
             Delete Profile Image
           </button>
         </form>

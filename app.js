@@ -14,7 +14,6 @@ const reviewRouter = require("./routes/reviewRouter");
 const userRouter = require("./routes/userRouter");
 
 const session = require("express-session");
-const MongoStore = require("connect-mongo");
 const flash = require("connect-flash");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
@@ -28,8 +27,7 @@ app.use(methodOverride("_method"));
 app.engine("ejs", ejsMate);
 app.use(express.static(path.join(__dirname, "public")));
 
-const MONGO_DB_URL = process.env.MONGO_DB_URL;
-const SESSION_SECRET_KEY = process.env.SESSION_SECRET_KEY;
+const MONGO_URL = "mongodb://127.0.0.1:27017/airbnb";
 
 main()
   .then(() => {
@@ -40,7 +38,7 @@ main()
   });
 
 async function main() {
-  await mongoose.connect(MONGO_DB_URL);
+  await mongoose.connect(MONGO_URL);
 }
 
 app.listen(8080, () => {
@@ -51,21 +49,8 @@ app.get("/", (req, res) => {
   res.redirect("/listings");
 });
 
-const store = MongoStore.create({
-  mongoUrl: MONGO_DB_URL,
-  crypto: {
-    secret: SESSION_SECRET_KEY,
-  },
-  touchAfter: 24 * 3600,
-});
-
-store.once("error", () => {
-  console.log("Error in mongo session store", err);
-});
-
 const sessionOption = {
-  store,
-  secret: SESSION_SECRET_KEY,
+  secret: "thisisnotagoodsecret",
   resave: false,
   saveUninitialized: true,
   cookie: {

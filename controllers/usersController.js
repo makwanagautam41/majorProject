@@ -1,5 +1,7 @@
 const { cloudinary } = require("../cloudConfig");
 const User = require("../models/userModel");
+const Review = require("../models/reviewModel");
+const Listing = require("../models/listingModel");
 
 module.exports.renderSignupPage = (req, res) => {
   res.render("users/signup");
@@ -187,4 +189,62 @@ module.exports.logout = (req, res, next) => {
       res.redirect("/listings");
     }
   });
+};
+
+// Delete user account and their listings
+module.exports.deleteUser = async (req, res) => {
+  try {
+    const userId = req.user._id;
+    const user = await User.findById(req.user._id);
+
+    // Delete all listings created by the user
+    const userListings = await Listing.find({ owner: userId });
+    await Listing.deleteMany({ owner: userId });
+
+    // Delete reviews associated with the user's listings
+    await Review.deleteMany({
+      listing: { $in: userListings.map((listing) => listing._id) },
+    });
+
+    // Delete the user's profile image from Cloudinary
+    if (user.profileImage && user.profileImage.filename) {
+      try {
+        await cloudinary.uploader.destroy(user.profileImage.filename);
+      } catch (err) {
+        req.flash("error", "Error while deleting previous image");
+        return res.redirect("/profile");
+      }
+    }
+
+    // Delete images of the listings from Cloudinary (if any)
+    for (const listing of userListings) {
+      if (listing.image && listing.image.filename) {
+        try {
+          await cloudinary.uploader.destroy(listing.image.filename);
+        } catch (err) {
+          req.flash("error", "Error while deleting listing image");
+          return res.redirect("/profile");
+        }
+      }
+    }
+
+    // Delete the user
+    const deletedUser = await User.findByIdAndDelete(userId);
+
+    if (!deletedUser) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    // res
+    //   .status(200)
+    //   .json({ message: "User, listings, and reviews deleted successfully" });
+    req.flash(
+      "success",
+      "Your request to delete your account has been submitted. Please allow some time for processing."
+    );
+    res.redirect("/");
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Something went wrong" });
+  }
 };

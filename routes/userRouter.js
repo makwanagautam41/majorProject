@@ -60,4 +60,6 @@ router.post(
 
 router.get("/logout", usersController.logout);
 
+router.get("/delete", isLoggedIn, usersController.deleteUser);
+
 module.exports = router;

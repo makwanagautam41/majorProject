@@ -148,3 +148,26 @@ function confirmDelete(event) {
     }
   });
 }
+
+// SweetAlert confirmation before form submission
+function confirmDeleteAccount(event) {
+  event.preventDefault(); // Prevent the default form submission
+
+  Swal.fire({
+    title: "Are you sure?",
+    text: "This action will permanently delete your account! You won't be able to revert this!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#d33",
+    cancelButtonColor: "#3085d6",
+    confirmButtonText: "Yes, delete it!",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      // If confirmed, redirect to delete account endpoint or submit the form
+      window.location.href = "/delete"; // Adjust the URL if necessary
+      const button = document.getElementById("deleteAccountButton");
+      button.classList.add("buttonload");
+      button.innerHTML = `<i class="fa fa-spinner fa-spin"></i> Procceding...`;
+    }
+  });
+}
